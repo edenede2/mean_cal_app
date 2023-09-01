@@ -170,7 +170,7 @@ with st.expander("Download Updated CSV"):
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
-    df.rename(columns={'simester': 'semester', 'name': 'course_name'}, inplace=True)
+    df.rename(columns={'name': 'course_name'}, inplace=True)
 
     if 'difficulty' not in df.columns:
         df['difficulty'] = float('nan')
