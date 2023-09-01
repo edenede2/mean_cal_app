@@ -43,6 +43,9 @@ def calculate_overall_weighted_mean(data):
 # New Functions
 # Function to Add New Courses
 def add_new_course(df):
+    if df is None:
+        st.warning("No data available to add a new course.")
+        return None
     st.write("### Add a New Course")
     course_name = st.text_input("Course Name:")
     semester = st.radio("Semester:", ('a', 'b'))
@@ -170,8 +173,7 @@ with st.expander("Download Updated CSV"):
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
-    df.rename(columns={'name': 'course_name'}, inplace=True)
-
+    df.rename(columns={'simester': 'semester', 'name': 'course_name'}, inplace=True)
     if 'difficulty' not in df.columns:
         df['difficulty'] = float('nan')
 
