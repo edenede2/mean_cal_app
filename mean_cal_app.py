@@ -55,7 +55,7 @@ def add_new_course(df):
     finish_score = st.number_input("Finish Score:", min_value=0, max_value=100, step=1)
 
     if st.button("Add Course"):
-        new_row = {
+        new_row = pd.Series({
             'finish': finish_score,
             'work': None,
             'exam': None,
@@ -64,9 +64,8 @@ def add_new_course(df):
             'type': course_type,
             'year': year,
             'course_name': course_name
-        }
-        df = df.append(new_row, ignore_index=True)
-        st.write(f"Course {course_name} has been added successfully!")
+        })
+        return df.append(new_row, ignore_index=True)  # return the updated df
     return df  # return df even if button is not clicked
 
 # Function to Rate Course Difficulty
