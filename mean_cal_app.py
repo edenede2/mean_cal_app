@@ -180,7 +180,7 @@ if uploaded_file:
     # Call the new functions
     new_df = add_new_course(df)
     if new_df is not None:
-    df = new_df
+        df = new_df
 
     new_df = edit_existing_course(df)
     if new_df is not None:
