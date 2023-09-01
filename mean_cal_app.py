@@ -67,8 +67,8 @@ def add_new_course(df):
         }
         df = df.append(new_row, ignore_index=True)
         st.write(f"Course {course_name} has been added successfully!")
-        return df
-    return None
+    return df  # return df even if button is not clicked
+
 # Function to Rate Course Difficulty
 def rate_course_difficulty(df):
     st.write("### Rate Course Difficulty")
@@ -180,7 +180,7 @@ if uploaded_file:
     # Call the new functions
     new_df = add_new_course(df)
     if new_df is not None:
-        df = new_df
+    df = new_df
 
     new_df = edit_existing_course(df)
     if new_df is not None:
