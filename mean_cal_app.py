@@ -141,7 +141,7 @@ def suggest_courses_to_improve_score(df):
         st.write("#### Top 5 Suggested Courses to Help Improve Your Final Score:")
         st.table(suggested_courses.head(5)[['course_name', 'impact', 'difficulty', 'impact_per_difficulty']])
 
-st.title("University Course Manager /n by Eden Eldar")
+st.title("University Course Manager \n by Eden Eldar")
 
 # Sidebar with Help and Downloadable CSV Template
 with st.sidebar:
