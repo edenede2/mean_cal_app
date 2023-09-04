@@ -2,8 +2,6 @@
 import pandas as pd
 import streamlit as st
 
-df = None
-
 if 'df' not in st.session_state:
     st.session_state.df = pd.DataFrame()
     
@@ -15,7 +13,9 @@ def calculate_weighted_mean(group):
         return None
     return weighted_scores_sum / total_weight
 
-def edit_existing_course(df):
+
+def edit_existing_course():
+    df = st.session_state.df
     st.write("### Edit Existing Course")
     course_list = df['course_name'].unique().tolist()
     selected_course = st.selectbox("Select a course to edit:", course_list)
@@ -69,9 +69,8 @@ def add_new_course():
             'type': course_type,
             'year': year,
             'course_name': course_name,
-            'difficulty': None  # Adding the missing 'difficulty' field
+            'difficulty': None
         })
-        
         st.session_state.df = st.session_state.df.append(new_row, ignore_index=True)
         st.write("New course added!")
 
@@ -175,23 +174,12 @@ if uploaded_file:
         uploaded_df['difficulty'] = float('nan')
 
     st.session_state.df = uploaded_df
-    
 
-    
-    new_df = edit_existing_course(df)
-    if new_df is not None:
-        df = new_df
+    edit_existing_course()
+    add_new_course()
+    rate_course_difficulty()
+    suggest_courses_to_improve_score()
 
-    # Call the new functions
-    new_df = add_new_course(df)
-    if new_df is not None:
-        df = new_df
-
-    new_df = rate_course_difficulty(df)
-    if new_df is not None:
-        df = new_df
-
-    suggest_courses_to_improve_score(df)
 else:
     st.warning("You need to upload a CSV or Excel file.")
 
