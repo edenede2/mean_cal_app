@@ -172,7 +172,8 @@ if uploaded_file:
     st.session_state.df = pd.read_csv(uploaded_file)
     df.rename(columns={'simester': 'semester', 'name': 'course_name'}, inplace=True)
     if 'difficulty' not in df.columns:
-        df['difficulty'] = float('nan')    st.write("Uploaded data:")
+        df['difficulty'] = float('nan')
+        st.write("Uploaded data:")
     st.write(st.session_state.df)
     
 
