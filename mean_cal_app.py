@@ -4,6 +4,9 @@ import streamlit as st
 
 df = None
 
+if 'df' not in st.session_state:
+    st.session_state.df = pd.DataFrame()
+    
 def calculate_weighted_mean(group):
     valid_rows = group.dropna(subset=['finish', 'weight'], how='all')
     total_weight = valid_rows['weight'].sum()
@@ -43,10 +46,10 @@ def calculate_overall_weighted_mean(data):
 
 # New Functions
 # Function to Add New Courses
-def add_new_course(df):
-    if df is None or not isinstance(df, pd.DataFrame):
-        st.warning("No data available to add a new course. DataFrame is either None or not a DataFrame.")
-        return None
+def add_new_course():
+    if st.session_state.df.empty:
+        st.warning("No data available to add a new course.")
+        return
     
     st.write("### Add a New Course")
     course_name = st.text_input("Course Name:")
@@ -69,8 +72,9 @@ def add_new_course(df):
             'difficulty': None  # Adding the missing 'difficulty' field
         })
         
-        new_df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-        st.write(f"The course {course_name} has been uploaded !")
+        st.session_state.df = st.session_state.df.append(new_row, ignore_index=True)
+        st.write("New course added!")
+
         return new_df  # return the updated DataFrame
     return df  # return df even if button is not clicked
     
@@ -165,7 +169,9 @@ with st.sidebar:
 # File Upload
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file:
-    df = pd.read_csv(uploaded_file)
+    st.session_state.df = pd.read_csv(uploaded_file)
+    st.write("Uploaded data:")
+    st.write(st.session_state.df)
     df.rename(columns={'simester': 'semester', 'name': 'course_name'}, inplace=True)
     if 'difficulty' not in df.columns:
         df['difficulty'] = float('nan')
@@ -200,3 +206,6 @@ with st.expander("Download Updated CSV"):
         if st.button('Download Updated CSV File', key='download_csv1'):
             tmp_download_link = download_link(df, 'updated_courses.csv', 'Click here to download your updated CSV file')
             st.markdown(tmp_download_link, unsafe_allow_html=True)
+add_new_course()
+st.write("Updated DataFrame:")
+st.write(st.session_state.df)
