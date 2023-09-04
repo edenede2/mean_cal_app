@@ -44,9 +44,10 @@ def calculate_overall_weighted_mean(data):
 # New Functions
 # Function to Add New Courses
 def add_new_course(df):
-    if df is None:
-        st.warning("No data available to add a new course.")
+    if df is None or not isinstance(df, pd.DataFrame):
+        st.warning("No data available to add a new course. DataFrame is either None or not a DataFrame.")
         return None
+    
     st.write("### Add a New Course")
     course_name = st.text_input("Course Name:")
     semester = st.radio("Semester:", ('a', 'b'))
@@ -66,6 +67,8 @@ def add_new_course(df):
             'year': year,
             'course_name': course_name
         })
+        # Debug: Check type of df again before appending
+        st.write(f"Type of df before append: {type(df)}")
         return df.append(new_row, ignore_index=True)  # return the updated df
     return df  # return df even if button is not clicked
 
