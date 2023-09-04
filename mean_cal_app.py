@@ -65,7 +65,8 @@ def add_new_course(df):
             'semester': semester,
             'type': course_type,
             'year': year,
-            'course_name': course_name
+            'course_name': course_name,
+            'difficulty': None  # Adding the missing 'difficulty' field
         })
         
         # Debug: Check type of df and new_row
@@ -74,11 +75,7 @@ def add_new_course(df):
         st.write(f"DataFrame columns: {df.columns.tolist()}")
         st.write(f"Series index: {new_row.index.tolist()}")
 
-        # Try appending to a copy of the DataFrame
-        df_copy = df.copy()
-        df_copy = df_copy.append(new_row, ignore_index=True)
-        
-        return df_copy  # return the updated df
+        return df.append(new_row, ignore_index=True)  # return the updated df
     return df  # return df even if button is not clicked
 
 # Function to Rate Course Difficulty
