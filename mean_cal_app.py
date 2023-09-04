@@ -77,20 +77,25 @@ def add_new_course():
 
     
 # Function to Rate Course Difficulty
-def rate_course_difficulty(df):
+def rate_course_difficulty():
+    if st.session_state.df.empty:
+        st.warning("No data available to rate a course.")
+        return
+
     st.write("### Rate Course Difficulty")
-    course_list = df['course_name'].unique().tolist()
+    course_list = st.session_state.df['course_name'].unique().tolist()
     selected_course = st.selectbox("Select a course to rate:", course_list)
     difficulty = st.slider("Rate the difficulty of the course:", min_value=1, max_value=9, step=1)
 
     if st.button("Rate Difficulty"):
-        df.loc[df['course_name'] == selected_course, 'difficulty'] = difficulty
+        st.session_state.df.loc[st.session_state.df['course_name'] == selected_course, 'difficulty'] = difficulty
         st.write(f"Difficulty for course {selected_course} has been rated as {difficulty}!")
-        return df
-    return None
 
 # Function to Suggest Courses to Improve Final Score
-def suggest_courses_to_improve_score(df):
+def suggest_courses_to_improve_score():
+    if st.session_state.df.empty:
+        st.warning("No data available to rate a course.")
+        return
     st.write("### Suggest Courses to Improve Final Score")
     target_score = st.number_input("Target Final Score:", min_value=0, max_value=100, step=1)
     
