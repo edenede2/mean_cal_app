@@ -2,7 +2,7 @@
 import pandas as pd
 import streamlit as st
 
-
+df = None
 
 def calculate_weighted_mean(group):
     valid_rows = group.dropna(subset=['finish', 'weight'], how='all')
