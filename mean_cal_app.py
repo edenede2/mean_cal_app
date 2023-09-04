@@ -69,12 +69,6 @@ def add_new_course(df):
             'difficulty': None  # Adding the missing 'difficulty' field
         })
         
-        # Debug: Check type of df and new_row
-        st.write(f"Type of df before append: {type(df)}")
-        st.write(f"Type of new_row: {type(new_row)}")
-        st.write(f"DataFrame columns: {df.columns.tolist()}")
-        st.write(f"Series index: {new_row.index.tolist()}")
-
         new_df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
         return new_df  # return the updated DataFrame
     return df  # return df even if button is not clicked
