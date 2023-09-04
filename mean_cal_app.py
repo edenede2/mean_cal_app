@@ -75,8 +75,9 @@ def add_new_course(df):
         st.write(f"DataFrame columns: {df.columns.tolist()}")
         st.write(f"Series index: {new_row.index.tolist()}")
 
-        return df.append(new_row, ignore_index=True)  # return the updated df
-    return df  # return df even if button is not clicked
+        new_df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+        return new_df  # return the updated DataFrame
+return df  # return df even if button is not clicked
     
 # Function to Rate Course Difficulty
 def rate_course_difficulty(df):
