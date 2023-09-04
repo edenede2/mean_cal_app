@@ -40,6 +40,7 @@ def calculate_overall_weighted_mean(data):
     if total_weight == 0:
         return None
     return weighted_scores_sum / total_weight
+
 # New Functions
 # Function to Add New Courses
 def add_new_course(df):
@@ -65,7 +66,7 @@ def add_new_course(df):
             'year': year,
             'course_name': course_name
         })
-        return df.append(new_row, ignore_index=True)  # return the updated df
+        return df.extend(new_row)  # return the updated df
     return df  # return df even if button is not clicked
 
 # Function to Rate Course Difficulty
@@ -153,7 +154,7 @@ with st.sidebar:
     st.download_button("Download CSV Template", template_csv, "course_template.csv")
 
 # Download Updated CSV Button
-#with st.expander("Download Updated CSV"):
+# with st.expander("Download Updated CSV"):
 #    def download_link(object_to_download, download_filename, download_link_text):
 #        import base64
 #        if isinstance(object_to_download, pd.DataFrame):
