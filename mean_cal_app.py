@@ -44,9 +44,6 @@ def calculate_overall_weighted_mean(data):
 # New Functions
 # Function to Add New Courses
 def add_new_course(df):
-    if df is None:
-        st.warning("No data available to add a new course.")
-        return None
     st.write("### Add a New Course")
     course_name = st.text_input("Course Name:")
     semester = st.radio("Semester:", ('a', 'b'))
