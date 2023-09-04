@@ -67,22 +67,19 @@ def add_new_course(df):
             'year': year,
             'course_name': course_name
         })
-        # Debug: Check type of df again before appending
+        
+        # Debug: Check type of df and new_row
         st.write(f"Type of df before append: {type(df)}")
-        return df.append(new_row, ignore_index=True)  # return the updated df
-    return df  # return df even if button is not clicked
+        st.write(f"Type of new_row: {type(new_row)}")
+        st.write(f"DataFrame columns: {df.columns.tolist()}")
+        st.write(f"Series index: {new_row.index.tolist()}")
 
-# Function to Rate Course Difficulty
-def rate_course_difficulty(df):
-    st.write("### Rate Course Difficulty")
-    course_list = df['course_name'].unique().tolist()
-    selected_course = st.selectbox("Select a course to rate:", course_list)
-    difficulty = st.slider("Rate the difficulty of the course:", min_value=1, max_value=9, step=1)
-    if st.button("Rate Difficulty"):
-        df.loc[df['course_name'] == selected_course, 'difficulty'] = difficulty
-        st.write(f"Difficulty for course {selected_course} has been rated as {difficulty}!")
-        return df
-    return None
+        # Try appending to a copy of the DataFrame
+        df_copy = df.copy()
+        df_copy = df_copy.append(new_row, ignore_index=True)
+        
+        return df_copy  # return the updated df
+    return df  # return df even if button is not clicked
 
 # Function to Rate Course Difficulty
 def rate_course_difficulty(df):
