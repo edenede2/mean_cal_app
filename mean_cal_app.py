@@ -77,7 +77,7 @@ def add_new_course(df):
 
         new_df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
         return new_df  # return the updated DataFrame
-return df  # return df even if button is not clicked
+    return df  # return df even if button is not clicked
     
 # Function to Rate Course Difficulty
 def rate_course_difficulty(df):
