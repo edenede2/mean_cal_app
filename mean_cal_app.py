@@ -74,8 +74,7 @@ def add_new_course():
         st.session_state.df = st.session_state.df.append(new_row, ignore_index=True)
         st.write("New course added!")
 
-        return new_df  # return the updated DataFrame
-    return df  # return df even if button is not clicked
+
     
 # Function to Rate Course Difficulty
 def rate_course_difficulty(df):
