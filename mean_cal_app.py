@@ -198,6 +198,5 @@ with st.expander("Download Updated CSV"):
         if st.button('Download Updated CSV File', key='download_csv1'):
             tmp_download_link = download_link(st.session_state.df, 'updated_courses.csv', 'Click here to download your updated CSV file')  # Changed from download_link(df, ...)
             st.markdown(tmp_download_link, unsafe_allow_html=True)
-add_new_course()
 st.write("Updated DataFrame:")
 st.write(st.session_state.df)
