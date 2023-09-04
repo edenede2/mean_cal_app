@@ -47,7 +47,7 @@ def add_new_course(df):
     if df is None or not isinstance(df, pd.DataFrame):
         st.warning("No data available to add a new course. DataFrame is either None or not a DataFrame.")
         return None
-         
+    
     st.write("### Add a New Course")
     course_name = st.text_input("Course Name:")
     semester = st.radio("Semester:", ('a', 'b'))
@@ -57,7 +57,7 @@ def add_new_course(df):
     finish_score = st.number_input("Finish Score:", min_value=0, max_value=100, step=1)
 
     if st.button("Add Course"):
-         new_row = pd.Series({
+        new_row = pd.Series({
             'finish': finish_score,
             'work': None,
             'exam': None,
@@ -67,20 +67,17 @@ def add_new_course(df):
             'year': year,
             'course_name': course_name,
             'difficulty': None  # Adding the missing 'difficulty' field
-            })
+        })
         
-            # Debug: Check type of df and new_row
-            st.write(f"Type of df before append: {type(df)}")
-            st.write(f"Type of new_row: {type(new_row)}")
-            st.write(f"DataFrame columns: {df.columns.tolist()}")
-            st.write(f"Series index: {new_row.index.tolist()}")
-        
-        # Manually create a new DataFrame by concatenating the old df and new_row
-        new_df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-        
-        return new_df  # return the updated DataFrame
-    return df  # return df even if button is not clicked
+        # Debug: Check type of df and new_row
+        st.write(f"Type of df before append: {type(df)}")
+        st.write(f"Type of new_row: {type(new_row)}")
+        st.write(f"DataFrame columns: {df.columns.tolist()}")
+        st.write(f"Series index: {new_row.index.tolist()}")
 
+        return df.append(new_row, ignore_index=True)  # return the updated df
+    return df  # return df even if button is not clicked
+    
 # Function to Rate Course Difficulty
 def rate_course_difficulty(df):
     st.write("### Rate Course Difficulty")
