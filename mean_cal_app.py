@@ -153,21 +153,21 @@ with st.sidebar:
     st.download_button("Download CSV Template", template_csv, "course_template.csv")
 
 # Download Updated CSV Button
-with st.expander("Download Updated CSV"):
-    def download_link(object_to_download, download_filename, download_link_text):
-        import base64
-        if isinstance(object_to_download, pd.DataFrame):
-            object_to_download = object_to_download.to_csv(index=False)
-        b64 = base64.b64encode(object_to_download.encode()).decode()
-        return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
+#with st.expander("Download Updated CSV"):
+#    def download_link(object_to_download, download_filename, download_link_text):
+#        import base64
+#        if isinstance(object_to_download, pd.DataFrame):
+#            object_to_download = object_to_download.to_csv(index=False)
+#        b64 = base64.b64encode(object_to_download.encode()).decode()
+#        return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
 
-    if st.button('Download Updated CSV File'):
-        tmp_download_link = download_link(df, 'updated_courses.csv', 'Click here to download your updated CSV file')
-        st.markdown(tmp_download_link, unsafe_allow_html=True)
-    if df is not None:
-        if st.button('Download Updated CSV File'):
-            tmp_download_link = download_link(df, 'updated_courses.csv', 'Click here to download your updated CSV file')
-            st.markdown(tmp_download_link, unsafe_allow_html=True)
+#    if st.button('Download Updated CSV File'):
+#        tmp_download_link = download_link(df, 'updated_courses.csv', 'Click here to download your updated CSV file')
+#        st.markdown(tmp_download_link, unsafe_allow_html=True)
+#    if df is not None:
+#        if st.button('Download Updated CSV File'):
+#            tmp_download_link = download_link(df, 'updated_courses.csv', 'Click here to download your updated CSV file')
+#            st.markdown(tmp_download_link, unsafe_allow_html=True)
 # File Upload
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file:
