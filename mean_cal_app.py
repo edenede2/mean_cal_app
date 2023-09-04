@@ -67,13 +67,13 @@ def add_new_course(df):
             'year': year,
             'course_name': course_name,
             'difficulty': None  # Adding the missing 'difficulty' field
-        })
+            })
         
-        # Debug: Check type of df and new_row
-        st.write(f"Type of df before append: {type(df)}")
-        st.write(f"Type of new_row: {type(new_row)}")
-        st.write(f"DataFrame columns: {df.columns.tolist()}")
-        st.write(f"Series index: {new_row.index.tolist()}")
+            # Debug: Check type of df and new_row
+            st.write(f"Type of df before append: {type(df)}")
+            st.write(f"Type of new_row: {type(new_row)}")
+            st.write(f"DataFrame columns: {df.columns.tolist()}")
+            st.write(f"Series index: {new_row.index.tolist()}")
         
         # Manually create a new DataFrame by concatenating the old df and new_row
         new_df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
