@@ -103,10 +103,10 @@ def suggest_courses_to_improve_score():
         st.write(f"Suggestions for {course_type.upper()} courses:")
         
         # Filter the DataFrame to include only the relevant course_type
-    filtered_df = st.session_state.df[st.session_state.df['type'] == course_type]        
-    if filtered_df.empty:
-        st.write(f"No courses found for type {course_type.upper()}.")
-        continue
+        filtered_df = st.session_state.df[st.session_state.df['type'] == course_type]        
+        if filtered_df.empty:
+            st.write(f"No courses found for type {course_type.upper()}.")
+            continue
 
         # Compute the overall weighted mean for the filtered DataFrame
         overall_weighted_mean = calculate_overall_weighted_mean(filtered_df)
