@@ -66,7 +66,7 @@ def add_new_course(df):
             'year': year,
             'course_name': course_name
         })
-        return df.extend(new_row)  # return the updated df
+        return df.append(new_row, ignore_index=True)  # return the updated df
     return df  # return df even if button is not clicked
 
 # Function to Rate Course Difficulty
