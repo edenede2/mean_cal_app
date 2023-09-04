@@ -177,12 +177,13 @@ if uploaded_file:
     if 'difficulty' not in df.columns:
         df['difficulty'] = float('nan')
 
-    # Call the new functions
-    new_df = add_new_course(df)
+    
+    new_df = edit_existing_course(df)
     if new_df is not None:
         df = new_df
 
-    new_df = edit_existing_course(df)
+    # Call the new functions
+    new_df = add_new_course(df)
     if new_df is not None:
         df = new_df
 
