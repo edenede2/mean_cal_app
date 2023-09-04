@@ -194,9 +194,9 @@ with st.expander("Download Updated CSV"):
         b64 = base64.b64encode(object_to_download.encode()).decode()
         return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
         
-    if df is not None:
+    if st.session_state.df is not None:  # Changed from if df is not None:
         if st.button('Download Updated CSV File', key='download_csv1'):
-            tmp_download_link = download_link(df, 'updated_courses.csv', 'Click here to download your updated CSV file')
+            tmp_download_link = download_link(st.session_state.df, 'updated_courses.csv', 'Click here to download your updated CSV file')  # Changed from download_link(df, ...)
             st.markdown(tmp_download_link, unsafe_allow_html=True)
 add_new_course()
 st.write("Updated DataFrame:")
