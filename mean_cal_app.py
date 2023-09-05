@@ -60,19 +60,26 @@ def add_new_course():
     finish_score = st.number_input("Finish Score:", min_value=0, max_value=100, step=1)
 
     if st.button("Add Course"):
-        new_row = pd.Series({
-            'finish': finish_score,
-            'work': None,
-            'exam': None,
-            'weight': weight,
-            'semester': semester,
-            'type': course_type,
-            'year': year,
-            'course_name': course_name,
-            'difficulty': None
-        })
-        st.session_state.df = st.session_state.df.append(new_row, ignore_index=True)
-        st.write("New course added!")
+    new_row = pd.Series({
+        'finish': finish_score,
+        'work': None,
+        'exam': None,
+        'weight': weight,
+        'semester': semester,
+        'type': course_type,
+        'year': year,
+        'course_name': course_name,
+        'difficulty': None
+    })
+
+    st.write("Debug Info:")
+    st.write("Type of st.session_state.df:", type(st.session_state.df))
+    st.write("st.session_state.df head:", st.session_state.df.head())
+
+    temp_df = st.session_state.df.append(new_row, ignore_index=True)
+    st.session_state.df = temp_df
+
+    st.write("New course added!")
 
 
     
