@@ -46,7 +46,7 @@ def calculate_overall_weighted_mean(data):
 
 # New Functions
 # Function to Add New Courses
-def add_new_course():
+def add_new_course_updated():
     if st.session_state.df.empty:
         st.warning("No data available to add a new course.")
         return
