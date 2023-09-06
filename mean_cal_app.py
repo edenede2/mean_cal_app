@@ -51,24 +51,24 @@ def add_new_course():
         st.warning("No data available to add a new course.")
         return
     
-    st.write("### Add a New Course")
-    course_name = st.text_input("Course Name:")
-    semester = st.radio("Semester:", ('a', 'b'))
-    course_type = st.radio("Type:", ('ba', 'bsc'))
-    year = st.radio("Year:", (1, 2, 3, 4))
-    weight = st.number_input("Weight:", min_value=0.0, max_value=10.0, step=0.1)
-    finish_score = st.number_input("Finish Score:", min_value=0, max_value=100, step=1)
+    #st.write("### Add a New Course")
+    #course_name = st.text_input("Course Name:")
+    #semester = st.radio("Semester:", ('a', 'b'))
+    #course_type = st.radio("Type:", ('ba', 'bsc'))
+    #year = st.radio("Year:", (1, 2, 3, 4))
+    #weight = st.number_input("Weight:", min_value=0.0, max_value=10.0, step=0.1)
+    #finish_score = st.number_input("Finish Score:", min_value=0, max_value=100, step=1)
 
     if st.button("Add Course"):
         new_row = pd.Series({
-            'finish': finish_score,
+            'finish': 95,
             'work': None,
             'exam': None,
-            'weight': weight,
-            'semester': semester,
-            'type': course_type,
-            'year': year,
-            'course_name': course_name,
+            'weight': 3,
+            'semester': 'a',
+            'type': 'ba',
+            'year': 1,
+            'course_name': 'Intro to Python',
             'difficulty': None
         })
 
@@ -76,9 +76,9 @@ def add_new_course():
         st.write("Type of st.session_state.df:", type(st.session_state.df))
         st.write("st.session_state.df head:", st.session_state.df.head())
 
-    temp_df = st.session_state.df.append(new_row, ignore_index=True)
-    st.session_state.df = temp_df
-
+    next_index = len(session_state_df)
+    session_state_df.loc[next_index] = new_row
+    return session_state_df
     st.write("New course added!")
 
 
@@ -186,7 +186,8 @@ if uploaded_file:
     st.session_state.df = uploaded_df
 
     edit_existing_course()
-    add_new_course()
+    updated_df = add_new_course_updated(uploaded_df)
+    updated_df.tail()
     rate_course_difficulty()
     suggest_courses_to_improve_score()
 
