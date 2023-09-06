@@ -46,7 +46,7 @@ def calculate_overall_weighted_mean(data):
 
 # New Functions
 # Function to Add New Courses
-def add_new_course_updated():
+def add_new_course_updated(session_state_df):
     if st.session_state.df.empty:
         st.warning("No data available to add a new course.")
         return
@@ -75,6 +75,7 @@ def add_new_course_updated():
         st.write("Debug Info:")
         st.write("Type of st.session_state.df:", type(st.session_state.df))
         st.write("st.session_state.df head:", st.session_state.df.head())
+        st.write("New course added!")
 
     next_index = len(session_state_df)
     session_state_df.loc[next_index] = new_row
@@ -186,8 +187,9 @@ if uploaded_file:
     st.session_state.df = uploaded_df
 
     edit_existing_course()
-    updated_df = add_new_course_updated(uploaded_df)
-    updated_df.tail()
+    st.session_state.df = add_new_course_updated(st.session_state.df)
+    if st.session_state.df is not None:
+        st.write("New course added!")
     rate_course_difficulty()
     suggest_courses_to_improve_score()
 
